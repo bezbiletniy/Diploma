@@ -19,11 +19,11 @@ public class CardPage {
     private SelenideElement errNote = $x("//*[text()=\"Ошибка\"]");
 
     public void fullField(DataHelper.cardInfo info) {
-        numberOfCard.setValue(info.CardNumberApproved());
-        month.setValue(info.randomMonth());
-        year.setValue(info.randomYear());
-        owner.setValue(info.owner());
-        cvc.setValue(info.CVC());
+        numberOfCard.setValue(info.getCardNumber());
+        month.setValue(info.getMonth());
+        year.setValue(info.getYear());
+        owner.setValue(info.getOwner());
+        cvc.setValue(info.getCvc());
         continueButton.click();
     }
 

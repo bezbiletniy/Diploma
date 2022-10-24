@@ -21,8 +21,18 @@ public class CardTest {
         SelenideLogger.removeListener("allure");
     }
 
+    @Test
+    public void Test() {
+        var loginPage = open("http://localhost:9999", CardPage.class);
+        var payButtonClick = CardPage.payButton();
+        var cardInfo = DataHelper.randomField();
+        var fillPage = CardPage.fullField(cardInfo);
+
+
+    }
 
 }
+
 
 
 
