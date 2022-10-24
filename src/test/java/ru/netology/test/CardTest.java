@@ -21,5 +21,9 @@ public class CardTest {
         SelenideLogger.removeListener("allure");
     }
 
-    }
+
+}
+
+
+
 

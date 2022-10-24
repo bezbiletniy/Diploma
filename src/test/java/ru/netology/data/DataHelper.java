@@ -1,6 +1,9 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Locale;
@@ -91,7 +94,7 @@ public class DataHelper {
             return new cardInfo(CardNumberApproved(), currentMonth(), currentYear(), owner(), CVC());
         }
 
-        public static cardInfo DeclinedCard() {
+        public static cardInfo declinedCard() {
             return new cardInfo(CardNumberDeclined(), currentMonth(), currentYear(), owner(), CVC());
         }
 
