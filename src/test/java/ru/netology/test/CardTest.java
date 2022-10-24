@@ -28,7 +28,6 @@ public class CardTest {
         var cardInfo = DataHelper.randomField();
         var fillPage = CardPage.fullField(cardInfo);
 
-
     }
 
 }

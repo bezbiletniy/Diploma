@@ -109,11 +109,15 @@ public class DataHelper {
     }
 
     public static cardInfo approvedFieldAndCurrentYear() {
-        return new cardInfo(cardNumberApproved(), randomMonth(), currentMonth(), owner(), CVC());
+        return new cardInfo(cardNumberApproved(), randomMonth(), currentYear(), owner(), CVC());
     }
 
     public static cardInfo approvedFieldAndPastYear() {
-        return new cardInfo(cardNumberApproved(), randomMonth(), currentYear(), owner(), CVC());
+        return new cardInfo(cardNumberApproved(), randomMonth(), pastYear(), owner(), CVC());
+    }
+
+    public static cardInfo approvedFieldAndMistakeCvc() {
+        return new cardInfo(cardNumberApproved(), randomMonth(), randomYear(), owner(), mistakeCvc());
     }
 
     @Value

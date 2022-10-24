@@ -27,6 +27,7 @@ public class CardPage {
         continueButton.click();
     }
 
+
     public void payButton(){
         payButton.click();
     }
