@@ -123,11 +123,7 @@ public class DataHelper {
     @Value
     @AllArgsConstructor
     public static class CardInfo {
-        String cardNumber;
-        String year;
-        String month;
-        String owner;
-        String cvc;
+        ???
     }
 
 
