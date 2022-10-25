@@ -2,13 +2,13 @@ package ru.netology.data;
 import lombok.SneakyThrows;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class SqlHelper {
 
     private static QueryRunner runner = new QueryRunner();
+
     private SqlHelper() {
     }
 
@@ -21,8 +21,37 @@ public class SqlHelper {
     public static String approvedPaymentStatement() {
         var codeSQL = "SELECT ??? FROM ??";
         try (var conn = getConnect()) {
-            runner.query(conn, codeSQL, new ScalarHandler<String>());
+            var result = runner.query(conn, codeSQL, new ScalarHandler<String>());
+            return result;
         }
+    }
+
+    @SneakyThrows
+    public static String declinedPaymentStatement() {
+        var codeSQL = "SELECT ??? FROM ??";
+        try (var conn = getConnect()) {
+            var result = runner.query(conn, codeSQL, new ScalarHandler<String>());
+            return result;
+        }
+    }
+
+    @SneakyThrows
+    public static String approvedCreditStatement() {
+        var codeSQL = "SELECT ??? FROM ??";
+        try (var conn = getConnect()) {
+            var result = runner.query(conn, codeSQL, new ScalarHandler<String>());
+            return result;
+        }
+    }
+
+    @SneakyThrows
+    public static String declinedCreditStatement() {
+        var codeSQL = "SELECT ??? FROM ??";
+        try (var conn = getConnect()) {
+            var result = runner.query(conn, codeSQL, new ScalarHandler<String>());
+            return result;
+        }
+    }
 
     @SneakyThrows
     public static void cleanDatabase() {
@@ -30,7 +59,5 @@ public class SqlHelper {
         runner.execute(connection, "DELETE FROM ???");
         runner.execute(connection, "DELETE FROM ???");
         runner.execute(connection, "DELETE FROM ???");
-        runner.execute(connection, "DELETE FROM ???");
     }
-
 }
