@@ -1,6 +1,20 @@
-# Описание процедуры запуска автотестов
+# Дипломный проект
 
-## MySQL:
+## План автоматизации и отчетные документы:
+
+1. [План автоматизации](https://github.com/bezbiletniy/Diploma/blob/master/plan_reports/plan.md)
+2. Отчётные документы по итогам автоматизированного тестирования
+3. Отчётные документы по итогам автоматизации
+
+## Файлы и директории:
+
+1. Файлы docker-compose-mysql.yml, docker-compose-posgreSQL.yml, application.properties находятся в корне проекта
+2. Jar файл и gate-simulator находятся в папке artifacts
+3. Код тестов находится в папке src/test/java/ru/netology
+
+## Описание процедуры запуска автотестов:
+
+### MySQL:
 
 1. В application.properties использовать:
 
@@ -22,7 +36,7 @@
 
       `docker-compose -f docker-compose-mysql.yml down`
 
-## PostgreSQL:
+### PostgreSQL:
 
 1. В application.properties использовать:
 
