@@ -52,6 +52,12 @@ public class DataHelper {
         return String.format("%02d", month);
     }
 
+    public static String nextMonth() {
+        LocalDate currentMonth = LocalDate.now();
+        int month = currentMonth.getMonthValue() + 1;
+        return String.format("%02d", month);
+    }
+
     public static String randomYear() {
         Random random = new Random();
         int i = random.nextInt(10);
@@ -72,6 +78,12 @@ public class DataHelper {
         return Integer.toString(year);
     }
 
+    public static String nextYear() {
+        LocalDate currentYear = LocalDate.now();
+        int year = currentYear.getYear() - 1999;
+        return Integer.toString(year);
+    }
+
     public static String owner() {
         return faker.name().firstName();
     }
@@ -80,7 +92,7 @@ public class DataHelper {
         return faker.number().digits(3);
     }
 
-    public static String mistakeCvc() {
+    public static String wrongCvc() {
         return faker.number().digits(2);
     }
 
@@ -93,39 +105,56 @@ public class DataHelper {
     }
 
     public static cardInfo approvedField() {
-        return new cardInfo(cardNumberApproved(), randomMonth(), randomYear(), owner(), CVC());
+        return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), owner(), CVC());
     }
 
     public static cardInfo declinedField() {
-        return new cardInfo(cardNumberDeclined(), randomMonth(), randomYear(), owner(), CVC());
+        return new cardInfo(cardNumberDeclined(), currentMonth(), currentYear(), owner(), CVC());
     }
 
-    public static cardInfo approvedFieldAndCurrentMonth() {
-        return new cardInfo(cardNumberApproved(), currentMonth(), randomYear(), owner(), CVC());
+    public static cardInfo approvedFieldAndNextMonth() {
+        return new cardInfo(cardNumberApproved(), nextMonth(), currentYear(), owner(), CVC());
     }
 
     public static cardInfo approvedFieldAndPastMonth() {
-        return new cardInfo(cardNumberApproved(), pastMonth(), randomYear(), owner(), CVC());
+        return new cardInfo(cardNumberApproved(), pastMonth(), currentYear(), owner(), CVC());
     }
 
-    public static cardInfo approvedFieldAndCurrentYear() {
-        return new cardInfo(cardNumberApproved(), randomMonth(), currentYear(), owner(), CVC());
+    public static cardInfo approvedFieldAndNextYear() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), nextYear(), owner(), CVC());
     }
 
     public static cardInfo approvedFieldAndPastYear() {
-        return new cardInfo(cardNumberApproved(), randomMonth(), pastYear(), owner(), CVC());
+        return new cardInfo(cardNumberApproved(), currentMonth(), pastYear(), owner(), CVC());
     }
 
-    public static cardInfo approvedFieldAndMistakeCvc() {
-        return new cardInfo(cardNumberApproved(), randomMonth(), randomYear(), owner(), mistakeCvc());
+    public static cardInfo approvedFieldAndWrongCvc() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), owner(), wrongCvc());
     }
 
-    @Value
-    @AllArgsConstructor
-    public static class CardInfo {
-        ???
+    public static cardInfo emptyCardField() {
+        return new cardInfo("", currentMonth(), currentYear(), owner(), CVC());
     }
 
+    public static cardInfo emptyMonthField() {
+        return new cardInfo(cardNumberApproved(), "", currentYear(), owner(), CVC());
+    }
+
+    public static cardInfo emptyYearField() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), "", owner(), CVC());
+    }
+
+    public static cardInfo emptyOwnerField() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), "", CVC());
+    }
+
+    public static cardInfo emptyCvcField() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), owner(), "");
+    }
+
+    public static cardInfo emptyFields() {
+        return new cardInfo("", "", "", "", "");
+    }
 
 }
 

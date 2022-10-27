@@ -1,24 +1,42 @@
 package ru.netology.page;
+
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.data.DataHelper;
+
 import java.time.Duration;
-import static com.codeborne.selenide.Selenide.$x;
+
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 
 public class CardPage {
 
-    private SelenideElement payButton = $x("//span[text()=\"Купить\"]");
-    private SelenideElement payInCreditButton = $x("//span[text()=\"Купить в кредит\"]");
-    private SelenideElement numberOfCard = $x("//span[text()=\"Номер карты\"]");
-    private SelenideElement month = $x("//span[text()=\"Месяц\"]");
-    private SelenideElement year = $x("//span[text()=\"Год\"]");
-    private SelenideElement owner = $x("//span[text()=\"Владелец\"]");
-    private SelenideElement cvc = $x("//span[text()=\"CVC/CVV\"]");
-    private SelenideElement continueButton = $x("//*[text()=\"Продолжить\"]");
-    private SelenideElement sucNote = $x("//*[text()=\"Успешно\"]");
-    private SelenideElement errNote = $x("//*[text()=\"Ошибка\"]");
+    private static SelenideElement payButton = $x("//*[.=\"Купить\"]");
+    private static SelenideElement payInCreditButton = $x("//*[.=\"Купить в кредит\"]");
+    private static SelenideElement numberOfCard = $x("//*[@placeholder='0000 0000 0000 0000']");
+    private static SelenideElement month = $x("//*[@placeholder='08']");
+    private static SelenideElement year = $x("//*[@placeholder='22']");
+    private static ElementsCollection ownerSet = $$x("//*[@class='input__control']");
+    private static SelenideElement owner = ownerSet.get(3);
+    private static SelenideElement cvc = $x("//*[@placeholder='999']");
+    private static ElementsCollection continueButtonSet = $$x("//*[@class='button__text']");
+    private static SelenideElement continueButton = continueButtonSet.get(2);
+    private static SelenideElement sucNote = $(byText("Операция одобрена Банком."));
+    private static SelenideElement errNote = $(byText("Ошибка! Банк отказал в проведении операции."));
 
-    public void fullField(DataHelper.cardInfo info) {
+    private static SelenideElement emptyCardField = $(byText("Неверный формат"));
+
+    private static SelenideElement emptyMonthField = $(byText("Неверный формат"));
+
+    private static SelenideElement emptyYearField = $(byText("Неверный формат"));
+
+    private static SelenideElement emptyOwnerField = $(byText("Поле обязательно для заполнения"));
+
+    private static SelenideElement emptyCVCField = $(byText("Неверный формат"));
+
+
+    public static void fullField(DataHelper.cardInfo info) {
         numberOfCard.setValue(info.getCardNumber());
         month.setValue(info.getMonth());
         year.setValue(info.getYear());
@@ -27,49 +45,40 @@ public class CardPage {
         continueButton.click();
     }
 
-
-    public void payButton(){
+    public static void payToButton() {
         payButton.click();
     }
-    public void payInCreditButton(){
+
+    public static void payInCreditToButton() {
         payInCreditButton.click();
     }
 
-    public void payButtonApprovedCheck() {
-        sucNote.shouldBe(Condition.visible, Duration.ofSeconds(5));
+    public static void successfulWay() {
+        sucNote.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
-    public void payButtonDeclinedCheck() {
-        errNote.shouldBe(Condition.visible, Duration.ofSeconds(5));
+    public static void unSuccessfulWay() {
+        errNote.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }
 
-    public void payInCreditApprovedCheck() {
-        sucNote.shouldBe(Condition.visible, Duration.ofSeconds(5));
+    public static void cardNumberError() {
+        numberOfCard.shouldBe(Condition.visible);
     }
 
-    public void payInCreditDeclinedCheck() {
-        errNote.shouldBe(Condition.visible, Duration.ofSeconds(5));
+    public static void monthError() {
+        month.shouldBe(Condition.visible);
     }
 
-    public void cardNumberError() {
-        numberOfCard.shouldHave(Condition.exactText("Неверный формат"));
-    }
-    public void monthError() {
-        month.shouldHave(Condition.exactText("Неверно указан срок действия карты"));
-    }
-    public void yearError() {
-        year.shouldHave(Condition.exactText("Истёк срок действия карты"));
-    }
-    public void ownerError() {
-        owner.shouldHave(Condition.exactText("Поле обязательно для заполнения"));
+    public static void yearError() {
+        year.shouldBe(Condition.visible);
     }
 
-    public void cvcError() {
-        cvc.shouldHave(Condition.exactText("Неверный формат"));
+    public static void ownerError() {
+        owner.shouldBe(Condition.visible);
     }
 
-    public void emptyError() {
-        numberOfCard.shouldHave(Condition.exactText("Неверный формат"));
+    public static void cvcError() {
+        cvc.shouldBe(Condition.visible);
     }
 
 }
