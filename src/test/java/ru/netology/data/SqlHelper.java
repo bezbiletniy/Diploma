@@ -22,26 +22,27 @@ public class SqlHelper {
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        var codeSQL = "SELECT ? FROM ?";
+        var codeSQL = "SELECT * FROM payment_entity";
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(PaymentModel.class));
-            return ?;
+            return result.getStatus();
         }
     }
 
     @SneakyThrows
     public static String getCreditStatus() {
-        var codeSQL = "SELECT ? FROM ?";
+        var codeSQL = "SELECT * FROM credit_request_entity";
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(CreditModel.class));
-            return ?;
+            return result.getStatus();
         }
     }
 
     @SneakyThrows
     public static void cleanDatabase() {
         var connection = getConnect();
-        runner.execute(connection, "DELETE FROM ?");
-        runner.execute(connection, "DELETE FROM ?");
+        runner.execute(connection, "DELETE FROM payment_entity");
+        runner.execute(connection, "DELETE FROM credit_request_entity");
+        runner.execute(connection, "DELETE FROM order_entity");
     }
 }

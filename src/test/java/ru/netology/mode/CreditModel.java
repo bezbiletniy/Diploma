@@ -10,5 +10,8 @@ import lombok.NoArgsConstructor;
 @Getter
 
 public class CreditModel {
-
+    String id;
+    String bank_id;
+    String created;
+    String status;
 }

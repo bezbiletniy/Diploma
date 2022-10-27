@@ -12,4 +12,10 @@ import lombok.NoArgsConstructor;
 
 public class PaymentModel {
 
+    String id;
+    String amount;
+    String created;
+    String status;
+    String transaction_id;
+
 }

@@ -2,6 +2,7 @@ package ru.netology.test;
 
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import lombok.val;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static ru.netology.data.SqlHelper.cleanDatabase;
+import static ru.netology.data.SqlHelper.getPaymentStatus;
 
 public class CardTestGetStatus {
 
@@ -30,7 +32,22 @@ public class CardTestGetStatus {
     static void tearDown () {
         cleanDatabase();
     }
+
+    @Test
+    public void shouldFillFormWithApprovedCardForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.approvedField();
+        CardPage.fullField(cardInfo);
+        CardPage.successfulWay();
+
+        var expectedStatus = "APPROVED";
+        var actualStatus = getPaymentStatus();
+        assertEquals(expectedStatus, actualStatus);
+    }
 }
+
+
 
 
 
