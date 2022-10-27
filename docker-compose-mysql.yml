@@ -2,12 +2,14 @@ version: '3.7'
 services:
   node-app:
     build: ./artifacts/gate-simulator
-    image: node-app:latest
+    image: latest
+    container_name: node
     ports:
       - '9999:9999'
   mysql:
     image: mysql:latest
-    restart: always
+    container_name: mysql-container
+    command: --innodb_use_native_aio=0
     ports:
       - '3306:3306'
     volumes:

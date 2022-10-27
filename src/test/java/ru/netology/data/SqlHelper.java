@@ -4,6 +4,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import ru.netology.mode.CreditModel;
 import ru.netology.mode.PaymentModel;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -21,26 +22,26 @@ public class SqlHelper {
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        var codeSQL = "SELECT ?? FROM ??";
+        var codeSQL = "SELECT ? FROM ?";
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(PaymentModel.class));
-            ??;
+            return ?;
         }
     }
 
     @SneakyThrows
     public static String getCreditStatus() {
-        var codeSQL = "SELECT ?? FROM ??";
+        var codeSQL = "SELECT ? FROM ?";
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(CreditModel.class));
-            ??;
+            return ?;
         }
     }
 
     @SneakyThrows
     public static void cleanDatabase() {
         var connection = getConnect();
-        runner.execute(connection, "DELETE FROM ??");
-        runner.execute(connection, "DELETE FROM ??");
+        runner.execute(connection, "DELETE FROM ?");
+        runner.execute(connection, "DELETE FROM ?");
     }
 }
