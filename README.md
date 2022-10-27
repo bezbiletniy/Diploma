@@ -26,7 +26,7 @@
 
 3. Запустить jar файл через команду в терминале:
 
-      `java -jar ./artifacts/aqa-shop.jar`
+      `java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar`
 
 4. Запустить автотесты используя зеленый треугольник в IDEA либо через команду в терминале:
        
@@ -48,7 +48,7 @@
 
 3. Запустить jar файл через команду в терминале:
 
-   `java -jar ./artifacts/aqa-shop.jar`
+   `java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar`
 
 4. Запустить автотесты используя зеленый треугольник в IDEA либо через команду в терминале:
 
