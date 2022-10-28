@@ -26,24 +26,17 @@ public class SqlHelper {
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(PaymentModel.class));
             return result.getStatus();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
         }
-        return null;
     }
 
     @SneakyThrows
     public static String getPaymentDeclinedStatus() {
         var codeSQL = "SELECT * FROM payment_entity JOIN order_entity ON transaction_id = payment_id where status = 'DECLINED'";
         try (var conn = getConnect()) {
-            var result = runner.query(conn, codeSQL, new BeanHandler<>(CreditModel.class));
+            var result = runner.query(conn, codeSQL, new BeanHandler<>(PaymentModel.class));
             return result.getStatus();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
         }
-        return null;
     }
-
 
     @SneakyThrows
     public static void cleanDatabase() {

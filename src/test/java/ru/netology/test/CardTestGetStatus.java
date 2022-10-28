@@ -36,7 +36,7 @@ public class CardTestGetStatus {
         CardPage.fullField(cardInfo);
         CardPage.successfulWay();
         var expectedStatus = "APPROVED";
-        var actualStatus = SqlHelper.getPaymentStatus();
+        var actualStatus = SqlHelper.getPaymentApprovedStatus();
         assertEquals(expectedStatus, actualStatus);
     }
 
@@ -48,7 +48,7 @@ public class CardTestGetStatus {
         CardPage.fullField(cardInfo);
         CardPage.successfulWay();
         var expectedStatus = "DECLINED";
-        var actualStatus = SqlHelper.getPaymentStatus();
+        var actualStatus = SqlHelper.getPaymentDeclinedStatus();
         assertEquals(expectedStatus, actualStatus);
     }
 }
