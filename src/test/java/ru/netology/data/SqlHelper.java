@@ -6,9 +6,7 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import ru.netology.mode.CreditModel;
 import ru.netology.mode.PaymentModel;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SqlHelper {
 
@@ -24,7 +22,7 @@ public class SqlHelper {
 
     @SneakyThrows
     public static String getPaymentStatus() {
-        var codeSQL = "SELECT status FROM payment_entity";
+        var codeSQL = "SELECT * FROM payment_entity JOIN order_entity ON transaction_id = payment_id where status = 'APPROVED'";
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(PaymentModel.class));
             return result.getStatus();
@@ -36,7 +34,7 @@ public class SqlHelper {
 
     @SneakyThrows
     public static String getCreditStatus() {
-        var codeSQL = "SELECT status FROM credit_request_entity";
+        var codeSQL = "SELECT * FROM payment_entity JOIN order_entity ON transaction_id = payment_id where status = 'DECLINED'";
         try (var conn = getConnect()) {
             var result = runner.query(conn, codeSQL, new BeanHandler<>(CreditModel.class));
             return result.getStatus();
@@ -45,6 +43,7 @@ public class SqlHelper {
         }
         return null;
     }
+
 
     @SneakyThrows
     public static void cleanDatabase() {
