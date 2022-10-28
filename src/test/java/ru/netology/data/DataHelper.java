@@ -2,11 +2,13 @@ package ru.netology.data;
 
 import com.github.javafaker.Faker;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Random;
+
 
 public class DataHelper {
 

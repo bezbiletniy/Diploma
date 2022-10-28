@@ -14,8 +14,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.netology.data.SqlHelper.cleanDatabase;
-import static ru.netology.data.SqlHelper.getPaymentStatus;
+import static ru.netology.data.SqlHelper.*;
 
 public class CardTestGetStatus {
 
@@ -42,7 +41,20 @@ public class CardTestGetStatus {
         CardPage.successfulWay();
 
         var expectedStatus = "APPROVED";
-        var actualStatus = getPaymentStatus();
+        var actualStatus = SqlHelper.getPaymentStatus();
+        assertEquals(expectedStatus, actualStatus);
+    }
+
+    @Test
+    public void shouldFillFormWithDeclinedCardForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.declinedField();
+        CardPage.fullField(cardInfo);
+        CardPage.successfulWay();
+
+        var expectedStatus = "DECLINED";
+        var actualStatus = SqlHelper.getPaymentStatus();
         assertEquals(expectedStatus, actualStatus);
     }
 }
