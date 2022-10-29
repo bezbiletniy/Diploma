@@ -56,4 +56,4 @@
 
 6. Остановить контейнеры через команду в терминале:
 
-   `docker-compose -f docker-compose-posgresql.yml down`
+   `docker-compose -f docker-compose-postgresql.yml down`

@@ -7,7 +7,7 @@ services:
     ports:
       - '9999:9999'
   postgres:
-    image: latest
+    image: postgres:latest
     container_name: postgres
     ports:
       - '5432:5432'
