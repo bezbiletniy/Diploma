@@ -51,6 +51,30 @@ public class CardTestGetStatus {
         var actualStatus = SqlHelper.getPaymentDeclinedStatus();
         assertEquals(expectedStatus, actualStatus);
     }
+
+    @Test
+    public void shouldFillFormWithApprovedCardForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedField();
+        CardPage.fullField(cardInfo);
+        CardPage.successfulWay();
+        var expectedStatus = "APPROVED";
+        var actualStatus = SqlHelper.getCreditApprovedStatus();
+        assertEquals(expectedStatus, actualStatus);
+    }
+
+    @Test
+    public void shouldFillFormWithDeclinedCardForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedField();
+        CardPage.fullField(cardInfo);
+        CardPage.successfulWay();
+        var expectedStatus = "DECLINED";
+        var actualStatus = SqlHelper.getCreditDeclinedStatus();
+        assertEquals(expectedStatus, actualStatus);
+    }
 }
 
 

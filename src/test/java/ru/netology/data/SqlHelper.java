@@ -39,6 +39,24 @@ public class SqlHelper {
     }
 
     @SneakyThrows
+    public static String getCreditApprovedStatus() {
+        var codeSQL = "SELECT * FROM credit_request_entity JOIN order_entity ON bank_id = credit_id where status = 'APPROVED'";
+        try (var conn = getConnect()) {
+            var result = runner.query(conn, codeSQL, new BeanHandler<>(CreditModel.class));
+            return result.getStatus();
+        }
+    }
+
+    @SneakyThrows
+    public static String getCreditDeclinedStatus() {
+        var codeSQL = "SELECT * FROM credit_request_entity JOIN order_entity ON bank_id = credit_id where status = 'DECLINED'";
+        try (var conn = getConnect()) {
+            var result = runner.query(conn, codeSQL, new BeanHandler<>(CreditModel.class));
+            return result.getStatus();
+        }
+    }
+
+    @SneakyThrows
     public static void cleanDatabase() {
         var connection = getConnect();
         runner.update(connection, "DELETE FROM payment_entity");
