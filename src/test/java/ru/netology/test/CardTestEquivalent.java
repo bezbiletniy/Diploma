@@ -163,4 +163,58 @@ public class CardTestEquivalent {
         CardPage.fullField(cardInfo);
         CardPage.cvcError();
     }
+
+    @Test
+    public void shouldFillFormWithZeroMonthForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.approvedFieldAndZeroMonth();
+        CardPage.fullField(cardInfo);
+        CardPage.monthError();
+    }
+
+    @Test
+    public void shouldFillFormWithZeroMonthForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedFieldAndZeroMonth();
+        CardPage.fullField(cardInfo);
+        CardPage.monthError();
+    }
+
+    @Test
+    public void shouldFillFormWithThirteenthMonthForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.approvedFieldAndThirteenthMonth();
+        CardPage.fullField(cardInfo);
+        CardPage.monthError();
+    }
+
+    @Test
+    public void shouldFillFormWithThirteenthMonthForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedFieldAndThirteenthMonth();
+        CardPage.fullField(cardInfo);
+        CardPage.monthError();
+    }
+
+    @Test
+    public void shouldFillFormWithZeroCvcForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.approvedFieldAndZeroCvc();
+        CardPage.fullField(cardInfo);
+        CardPage.cvcError();
+    }
+
+    @Test
+    public void shouldFillFormWithZeroCvcForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedFieldAndZeroCvc();
+        CardPage.fullField(cardInfo);
+        CardPage.cvcError();
+    }
 }

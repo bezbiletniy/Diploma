@@ -23,10 +23,10 @@ public class CardTestGetStatus {
         SelenideLogger.removeListener("allure");
     }
 
-    @AfterAll
-    static void tearDown () {
-        cleanDatabase();
-    }
+//    @AfterAll
+//    static void tearDown () {
+//        cleanDatabase();
+//    }
 
     @Test
     public void shouldFillFormWithApprovedCardForPayment() {
@@ -59,6 +59,7 @@ public class CardTestGetStatus {
         var cardInfo = DataHelper.approvedField();
         CardPage.fullField(cardInfo);
         CardPage.successfulWay();
+
         var expectedStatus = "APPROVED";
         var actualStatus = SqlHelper.getCreditApprovedStatus();
         assertEquals(expectedStatus, actualStatus);

@@ -54,6 +54,19 @@ public class DataHelper {
         return String.format("%02d", month);
     }
 
+    public static String thirteenthMonth() {
+        LocalDate currentMonth = LocalDate.now();
+        int between = (12 - currentMonth.getMonthValue()) + 1;
+        int month = currentMonth.getMonthValue() + between;
+        return String.format("%02d", month);
+    }
+
+    public static String zeroMonth() {
+        LocalDate currentMonth = LocalDate.now();
+        int month = currentMonth.getMonthValue()-currentMonth.getMonthValue();
+        return String.format("%02d", month);
+    }
+
     public static String nextMonth() {
         LocalDate currentMonth = LocalDate.now();
         int month = currentMonth.getMonthValue() + 1;
@@ -156,6 +169,18 @@ public class DataHelper {
 
     public static cardInfo emptyFields() {
         return new cardInfo("", "", "", "", "");
+    }
+
+    public static cardInfo approvedFieldAndZeroMonth() {
+        return new cardInfo(cardNumberApproved(), zeroMonth(), nextYear(), owner(), CVC());
+    }
+
+    public static cardInfo approvedFieldAndThirteenthMonth() {
+        return new cardInfo(cardNumberApproved(), thirteenthMonth(), currentYear(), owner(), CVC());
+    }
+
+    public static cardInfo approvedFieldAndZeroCvc() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), owner(), "000");
     }
 
 }
