@@ -23,10 +23,10 @@ public class CardTestGetStatus {
         SelenideLogger.removeListener("allure");
     }
 
-    @AfterAll
-    static void tearDown () {
-        cleanDatabase();
-    }
+//    @AfterAll
+//    static void tearDown () {
+//        cleanDatabase();
+//    }
 
     @Test
     public void shouldFillFormWithApprovedCardForPayment() {

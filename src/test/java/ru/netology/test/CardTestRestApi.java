@@ -80,4 +80,24 @@ public class CardTestRestApi {
                 statusCode(500).
                 body("message", equalTo("400 Bad Request"));
     }
+
+    @Test
+    public void shouldBeNotRestForEmptyCard() {
+        String request = "{\n" +
+                "    \"number\": \"\",\n" +
+                "    \"month\": \"\",\n" +
+                "    \"year\": \"\",\n" +
+                "    \"holder\": \"\",\n" +
+                "    \"cvc\": \"\"\n" +
+                "}";
+
+        given().
+                header("Content-Type", "application/json").
+                body(request).
+                when().
+                post("http://localhost:8080/api/v1/credit").
+                then().
+                statusCode(500).
+                body("message", equalTo("400 Bad Request"));
+    }
 }
