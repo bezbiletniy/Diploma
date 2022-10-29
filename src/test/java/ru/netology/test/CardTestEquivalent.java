@@ -217,4 +217,60 @@ public class CardTestEquivalent {
         CardPage.fullField(cardInfo);
         CardPage.cvcError();
     }
+
+    @Test
+    public void shouldFillFormWithShortCardForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.shortCard();
+        CardPage.fullField(cardInfo);
+        CardPage.cardNumberError();
+    }
+
+    @Test
+    public void shouldFillFormWithShortCardForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.shortCard();
+        CardPage.fullField(cardInfo);
+        CardPage.cardNumberError();
+    }
+
+    @Test
+    public void shouldFillFormWithRussiaNameForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.approvedFieldAndRussiaName();
+        CardPage.fullField(cardInfo);
+        CardPage.ownerError();
+    }
+
+    @Test
+    public void shouldFillFormWithRussiaNameForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedFieldAndRussiaName();
+        CardPage.fullField(cardInfo);
+        CardPage.ownerError();
+    }
+
+    @Test
+    public void shouldFillFormWithMoreThanFiveYearForPayment() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payToButton();
+        var cardInfo = DataHelper.approvedFieldAndMoreThanFiveYear();
+        CardPage.fullField(cardInfo);
+        CardPage.successfulWay();
+    }
+
+    @Test
+    public void shouldFillFormWithMoreThanFiveYearForCredit() {
+        var url = open("http://localhost:8080", CardPage.class);
+        CardPage.payInCreditToButton();
+        var cardInfo = DataHelper.approvedFieldAndMoreThanFiveYear();
+        CardPage.fullField(cardInfo);
+        CardPage.successfulWay();
+    }
+
+
 }

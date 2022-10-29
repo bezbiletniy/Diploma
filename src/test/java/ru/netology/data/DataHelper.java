@@ -99,8 +99,14 @@ public class DataHelper {
         return Integer.toString(year);
     }
 
+    public static String moreThenFiveYear() {
+        LocalDate currentYear = LocalDate.now();
+        int year = currentYear.getYear() - 1994;
+        return Integer.toString(year);
+    }
+
     public static String owner() {
-        return faker.name().firstName();
+        return faker.name().fullName();
     }
 
     public static String CVC() {
@@ -181,6 +187,18 @@ public class DataHelper {
 
     public static cardInfo approvedFieldAndZeroCvc() {
         return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), owner(), "000");
+    }
+
+    public static cardInfo shortCard() {
+        return new cardInfo("444444444444444", currentMonth(), currentYear(), owner(), CVC());
+    }
+
+    public static cardInfo approvedFieldAndRussiaName() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), currentYear(), "Андрей Бородин", CVC());
+    }
+
+    public static cardInfo approvedFieldAndMoreThanFiveYear() {
+        return new cardInfo(cardNumberApproved(), currentMonth(), moreThenFiveYear(), owner(), CVC());
     }
 
 }

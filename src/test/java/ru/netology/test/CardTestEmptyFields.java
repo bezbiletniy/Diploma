@@ -126,6 +126,10 @@ public class CardTestEmptyFields {
         var cardInfo = DataHelper.emptyFields();
         CardPage.fullField(cardInfo);
         CardPage.cardNumberError();
+        CardPage.monthError();
+        CardPage.yearError();
+        CardPage.ownerError();
+        CardPage.cvcError();
     }
 
 }
