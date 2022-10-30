@@ -12,24 +12,14 @@ public class SqlHelper {
 
     private static QueryRunner runner = new QueryRunner();
 
-    private static final String url = System.getProperty("db.url");
-    private static final String user = System.getProperty("db.user");
-    private static final String password = System.getProperty("db.password");
-    private static Connection connection;
-
-    public static Connection getConnection() {
-        try {
-            connection = DriverManager.getConnection(url, user, password);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-        return connection;
+    private static Connection getConnect() throws SQLException {
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
     }
 
     @SneakyThrows
     public static String getPaymentApprovedStatus() {
         var codeSQL = "SELECT * FROM payment_entity JOIN order_entity ON transaction_id = payment_id where status = 'APPROVED'";
-        try (Connection connection = getConnection()) {
+        try (Connection connection = getConnect()) {
             var result = runner.query(connection, codeSQL, new BeanHandler<>(PaymentModel.class));
             return result.getStatus();
         } catch (SQLException sqlException) {
@@ -41,7 +31,7 @@ public class SqlHelper {
     @SneakyThrows
     public static String getPaymentDeclinedStatus() {
         var codeSQL = "SELECT * FROM payment_entity JOIN order_entity ON transaction_id = payment_id where status = 'DECLINED'";
-        try (Connection connection = getConnection()) {
+        try (Connection connection = getConnect()) {
             var result = runner.query(connection, codeSQL, new BeanHandler<>(PaymentModel.class));
             return result.getStatus();
         } catch (SQLException sqlException) {
@@ -54,7 +44,7 @@ public class SqlHelper {
     @SneakyThrows
     public static String getCreditApprovedStatus() {
         var codeSQL = "SELECT * FROM credit_request_entity JOIN order_entity ON bank_id = credit_id where status = 'APPROVED'";
-        try (Connection connection = getConnection()) {
+        try (Connection connection = getConnect()) {
             var result = runner.query(connection, codeSQL, new BeanHandler<>(CreditModel.class));
             return result.getStatus();
         } catch (SQLException sqlException) {
@@ -66,7 +56,7 @@ public class SqlHelper {
     @SneakyThrows
     public static String getCreditDeclinedStatus() {
         var codeSQL = "SELECT * FROM credit_request_entity JOIN order_entity ON bank_id = credit_id where status = 'DECLINED'";
-        try (Connection connection = getConnection()) {
+        try (Connection connection = getConnect()) {
             var result = runner.query(connection, codeSQL, new BeanHandler<>(CreditModel.class));
             return result.getStatus();
         } catch (SQLException sqlException) {
@@ -77,16 +67,9 @@ public class SqlHelper {
 
     @SneakyThrows
     public static void cleanDatabase() {
-        val order = "DELETE FROM order_entity";
-        val payment = "DELETE FROM payment_entity";
-        val creditRequest = "DELETE FROM credit_request_entity";
-
-        try (val connection = getConnection()) {
-            runner.update(connection, order);
-            runner.update(connection, payment);
-            runner.update(connection, creditRequest);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        var connection = getConnect();
+        runner.execute(connection, "DELETE FROM credit_request_entity");
+        runner.execute(connection, "DELETE FROM payment_entity");
+        runner.execute(connection, "DELETE FROM order_entity");
     }
 }
