@@ -122,7 +122,7 @@ public class DataHelper {
     }
 
     public static cardInfo randomField() {
-        return new cardInfo(randomCardNumber(), randomMonth(), randomYear(), owner(), CVC());
+        return new cardInfo(randomCardNumber(), randomMonth(), currentYear(), owner(), CVC());
     }
 
     public static cardInfo approvedField() {

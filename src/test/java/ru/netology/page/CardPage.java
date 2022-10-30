@@ -54,11 +54,11 @@ public class CardPage {
     }
 
     public static void successfulWay() {
-        sucNote.shouldBe(Condition.visible, Duration.ofSeconds(15));
+        sucNote.shouldBe(Condition.visible, Duration.ofSeconds(20));
     }
 
     public static void unSuccessfulWay() {
-        errNote.shouldBe(Condition.visible, Duration.ofSeconds(15));
+        errNote.shouldBe(Condition.visible, Duration.ofSeconds(20));
     }
 
     public static void cardNumberError() {
