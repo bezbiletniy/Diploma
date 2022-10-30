@@ -1,19 +1,27 @@
 package ru.netology.data;
 import lombok.SneakyThrows;
-import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import ru.netology.mode.CreditModel;
 import ru.netology.mode.PaymentModel;
-
 import java.sql.*;
 
 public class SqlHelper {
 
     private static QueryRunner runner = new QueryRunner();
 
-    private static Connection getConnect() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+    private static String url = System.getProperty("db.url");
+    private static String user = System.getProperty("db.user");
+    private static String password = System.getProperty("db.password");
+    private static Connection connection;
+
+    public static Connection getConnect() {
+        try {
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return connection;
     }
 
     @SneakyThrows
