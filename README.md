@@ -3,8 +3,8 @@
 ## План автоматизации и отчетные документы:
 
 1. [План автоматизации](https://github.com/bezbiletniy/Diploma/blob/master/plan_reports/plan.md)
-2. Отчётные документы по итогам автоматизированного тестирования
-3. Отчётные документы по итогам автоматизации
+2. [Отчётные документы по итогам автоматизированного тестирования](https://github.com/bezbiletniy/Diploma/blob/master/plan_reports/report.md)
+3. [Отчётные документы по итогам автоматизации](https://github.com/bezbiletniy/Diploma/blob/master/plan_reports/summary.md)
 
 ## Файлы и директории:
 

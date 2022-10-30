@@ -30,7 +30,7 @@
 Успешных - 42 тестов
 Неуспешных - 6 тестов
 
-![Allure отчет по результатам тестирования](/image/Отчет Allure.png.png)
+[Allure отчет](https://github.com/bezbiletniy/Diploma/blob/master/image/%D0%9E%D1%82%D1%87%D0%B5%D1%82%20Allure.png)
 
 ## Процент успешных и не успешных тест-кейсов:
 
